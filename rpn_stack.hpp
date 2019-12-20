@@ -62,10 +62,10 @@ class RPNStack {
          * Create a stack with given initial values.
          * 
          * @param count the number of values in the vals parameter
-         * @param vals the initial values for the stack, pushed in order from
-         *             first to last
+         * @param ... the initial values for the stack, pushed in order from
+         *            first to last; values must be explicit doubles
          */
-        RPNStack(unsigned int count, double vals...);
+        RPNStack(unsigned int count, ...);
 
         /**
          * Default destructor. No special behavior.

@@ -24,9 +24,9 @@ const char* RPNDivByZeroException::what() const noexcept {
     return "Topmost value is 0, cannot divide";
 }
 
-RPNStack::RPNStack(unsigned int count, double vals...) : RPNStack() {
+RPNStack::RPNStack(unsigned int count, ...) : RPNStack() {
     va_list args;
-    va_start(args, vals);
+    va_start(args, count);
 
     for (unsigned int i = 0; i < count; i++) {
         double nextVal = va_arg(args, double);
