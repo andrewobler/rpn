@@ -12,6 +12,8 @@
 #include "rpn_stack.hpp"
 
 #include <cstdarg>
+#include <ctime>
+#include <random>
 #include <stack>
 #include <string>
 #include <vector>
@@ -23,6 +25,10 @@ const char* RPNStackException::what() const noexcept {
 const char* RPNDivByZeroException::what() const noexcept {
     return "Topmost value is 0, cannot divide";
 }
+
+std::default_random_engine RPNStack::rng = std::default_random_engine(time(NULL));
+
+std::uniform_real_distribution<> RPNStack::dist = std::uniform_real_distribution<>(RAND_DBL_MIN, RAND_DBL_MAX);
 
 RPNStack::RPNStack(unsigned int count, ...) : RPNStack() {
     va_list args;
@@ -93,7 +99,7 @@ void RPNStack::divide() {
     }
 
     double top = values.back();
-    if (top == 0) {
+    if (top == 0.0 || top == -0.0) {
         throw RPNDivByZeroException();
     }
     values.pop_back();
@@ -124,6 +130,10 @@ void RPNStack::swap() {
 
     values.push_back(top);
     values.push_back(nextTop);
+}
+
+void RPNStack::rand() {
+    values.push_back(dist(rng));
 }
 
 void RPNStack::clear() {

@@ -12,8 +12,13 @@
 #pragma once
 
 #include <exception>
+#include <random>
 #include <string>
 #include <vector>
+
+// Limits for random number generation
+#define RAND_DBL_MIN -100000.0
+#define RAND_DBL_MAX 100000.0
 
 /**
  * Thrown when an operation is attempted on an RPNStack with insufficient
@@ -47,6 +52,16 @@ class RPNDivByZeroException : public std::exception {
  */
 class RPNStack {
     private:
+        /**
+         * Shared random number generator for RPNStack::rand().
+         */
+        static std::default_random_engine rng;
+
+        /**
+         * Uniform distribution for randomly-generated doubles.
+         */
+        static std::uniform_real_distribution<> dist;
+
         /**
          * The core stack of numerical values.
          */
@@ -130,6 +145,11 @@ class RPNStack {
          * @throw RPNStackException if there are less than two values on the stack
          */
         void swap();
+
+        /**
+         * Push a random double onto the stack.
+         */
+        void rand();
 
         /**
          * Clear all values from the stack.
