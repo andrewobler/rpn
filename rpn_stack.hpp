@@ -152,6 +152,13 @@ class RPNStack {
         void rand();
 
         /**
+         * Negates the topmost value on the stack.
+         * 
+         * @throw RPNStackException if there are no values on the stack
+         */
+        void negate();
+
+        /**
          * Clear all values from the stack.
          */
         void clear();

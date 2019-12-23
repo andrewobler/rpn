@@ -136,6 +136,12 @@ void RPNStack::rand() {
     values.push_back(dist(rng));
 }
 
+void RPNStack::negate() {
+    double top = values.back();
+    values.pop_back();
+    values.push_back(-top);
+}
+
 void RPNStack::clear() {
     // TODO: does this free memory for original values?
     this->values = std::vector<double>();
