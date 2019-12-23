@@ -24,6 +24,36 @@ HWND btnDot;
 // Handle to the "Enter" button
 HWND btnEnter;
 
+// Handle to the "1" button
+HWND btnOne;
+
+// Handle to the "2" button
+HWND btnTwo;
+
+// Handle to the "3" button
+HWND btnThree;
+
+// Handle to the "+" button
+HWND btnPlus;
+
+// Handle to the "4" button
+HWND btnFour;
+
+// Handle to the "5" button
+HWND btnFive;
+
+// Handle to the "6" button
+HWND btnSix;
+
+// Handle to the "7" button
+HWND btnSeven;
+
+// Handle to the "8" button
+HWND btnEight;
+
+// Handle to the "9" button
+HWND btnNine;
+
 // Global storage of runtime instance handle
 HINSTANCE glblInstance;
 
@@ -80,6 +110,7 @@ int WINAPI wWinMain(
     SetWindowPos(btnZero, HWND_TOP, 0, mainClientRect.bottom - 100, mainClientRect.right / 2, 100, 0);
     SetWindowPos(btnDot, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 100, mainClientRect.right / 4, 100, 0);
     SetWindowPos(btnEnter, HWND_TOP, 3 * mainClientRect.right / 4, mainClientRect.bottom - 200, mainClientRect.right / 4, 200, 0);
+    SetWindowPos(btnOne, HWND_TOP, 0, mainClientRect.bottom - 200, mainClientRect.right / 4, 100, 0);
 
     ShowWindow(hwnd, nCmdShow);
 
@@ -117,7 +148,7 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             );
 
             if (zero == NULL) {
-                displayError(L"Unable to create zero button");
+                displayError(L"Unable to create 0 button");
             }
 
             btnZero = zero;
@@ -164,6 +195,27 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
             btnEnter = enter;
 
+            // Create "1" button
+            HWND one = CreateWindowW(
+                L"BUTTON",
+                L"1",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                0,
+                600,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (one == NULL) {
+                displayError(L"Unable to create 1 button");
+            }
+
+            btnOne = one;
+
             return 0;
         }
 
@@ -177,6 +229,8 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         MessageBox(NULL, L"Clicked dot!", L"Yahoo!", MB_OK | MB_ICONINFORMATION);
                     } else if (btn == btnEnter) {
                         MessageBox(NULL, L"Clicked Enter!", L"Whoopee!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnOne) {
+                        MessageBox(NULL, L"Clicked one!", L"Alright!", MB_OK | MB_ICONINFORMATION);
                     }
                     break;
                 }
@@ -206,13 +260,20 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     SendMessage(btnEnter, BM_CLICK, NULL, NULL);
                     break;
                 }
+
+                case '1':
+                case VK_NUMPAD1: {
+                    // Simulate a click on the "1" button
+                    SendMessage(btnOne, BM_CLICK, NULL, NULL);
+                    break;
+                }
             }
             return 0;
         }
 
-        case WM_PAINT: {
-            // TODO fill client area with grey/white
-        }
+        // case WM_PAINT: {
+        //     // TODO fill client area with grey/white
+        // }
 
         case WM_DESTROY: {
             PostQuitMessage(0);
