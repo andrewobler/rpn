@@ -18,6 +18,12 @@ RECT mainClientRect;
 // Handle to the "0" button
 HWND btnZero;
 
+// Handle to the "." button
+HWND btnDot;
+
+// Handle to the "Enter" button
+HWND btnEnter;
+
 // Global storage of runtime instance handle
 HINSTANCE glblInstance;
 
@@ -72,6 +78,8 @@ int WINAPI wWinMain(
 
     // Set button sizes relative to main window
     SetWindowPos(btnZero, HWND_TOP, 0, mainClientRect.bottom - 100, mainClientRect.right / 2, 100, 0);
+    SetWindowPos(btnDot, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 100, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnEnter, HWND_TOP, 3 * mainClientRect.right / 4, mainClientRect.bottom - 200, mainClientRect.right / 4, 200, 0);
 
     ShowWindow(hwnd, nCmdShow);
 
@@ -114,6 +122,48 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
             btnZero = zero;
 
+            // Create "." button
+            HWND dot = CreateWindowW(
+                L"BUTTON",
+                L".",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                200,
+                700,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (dot == NULL) {
+                displayError(L"Unable to create dot button");
+            }
+
+            btnDot = dot;
+
+            // Create "Enter" button
+            HWND enter = CreateWindowW(
+                L"BUTTON",
+                L"Enter",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                300,
+                700,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (enter == NULL) {
+                displayError(L"Unable to create enter button");
+            }
+
+            btnEnter = enter;
+
             return 0;
         }
 
@@ -123,11 +173,45 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     HWND btn = (HWND) lParam;
                     if (btn == btnZero) {
                         MessageBox(NULL, L"Clicked zero!", L"Yippee!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnDot) {
+                        MessageBox(NULL, L"Clicked dot!", L"Yahoo!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnEnter) {
+                        MessageBox(NULL, L"Clicked Enter!", L"Whoopee!", MB_OK | MB_ICONINFORMATION);
                     }
                     break;
                 }
             }
+            SetFocus(hwnd); // return focus to main window
             return 0;
+        }
+
+        case WM_KEYDOWN: {
+            switch (wParam) {
+                case '0':
+                case VK_NUMPAD0: {
+                    // Simulate a click on the "0" button
+                    SendMessage(btnZero, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case VK_OEM_PERIOD:
+                case VK_DECIMAL: {
+                    // Simulate a click on the "." button
+                    SendMessage(btnDot, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case VK_RETURN: {
+                    // Simulate a click on the "Enter" button
+                    SendMessage(btnEnter, BM_CLICK, NULL, NULL);
+                    break;
+                }
+            }
+            return 0;
+        }
+
+        case WM_PAINT: {
+            // TODO fill client area with grey/white
         }
 
         case WM_DESTROY: {
