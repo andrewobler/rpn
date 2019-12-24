@@ -111,6 +111,15 @@ int WINAPI wWinMain(
     SetWindowPos(btnDot, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 100, mainClientRect.right / 4, 100, 0);
     SetWindowPos(btnEnter, HWND_TOP, 3 * mainClientRect.right / 4, mainClientRect.bottom - 200, mainClientRect.right / 4, 200, 0);
     SetWindowPos(btnOne, HWND_TOP, 0, mainClientRect.bottom - 200, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnTwo, HWND_TOP, mainClientRect.right / 4, mainClientRect.bottom - 200, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnThree, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 200, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnFour, HWND_TOP, 0, mainClientRect.bottom - 300, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnFive, HWND_TOP, mainClientRect.right / 4, mainClientRect.bottom - 300, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnSix, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 300, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnPlus, HWND_TOP, 3 * mainClientRect.right / 4, mainClientRect.bottom - 400, mainClientRect.right / 4, 200, 0);
+    SetWindowPos(btnSeven, HWND_TOP, 0, mainClientRect.bottom - 400, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnEight, HWND_TOP, mainClientRect.right / 4, mainClientRect.bottom - 400, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnNine, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 400, mainClientRect.right / 4, 100, 0);
 
     ShowWindow(hwnd, nCmdShow);
 
@@ -216,6 +225,195 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
             btnOne = one;
 
+            // Create "2" button
+            HWND two = CreateWindowW(
+                L"BUTTON",
+                L"2",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                100,
+                600,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (two == NULL) {
+                displayError(L"Unable to create 2 button");
+            }
+
+            btnTwo = two;
+
+            // Create "3" button
+            HWND three = CreateWindowW(
+                L"BUTTON",
+                L"3",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                200,
+                600,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (three == NULL) {
+                displayError(L"Unable to create 3 button");
+            }
+
+            btnThree = three;
+
+            // Create "4" button
+            HWND four = CreateWindowW(
+                L"BUTTON",
+                L"4",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                0,
+                500,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (four == NULL) {
+                displayError(L"Unable to create 4 button");
+            }
+
+            btnFour = four;
+
+            // Create "5" button
+            HWND five = CreateWindowW(
+                L"BUTTON",
+                L"5",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                100,
+                500,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (five == NULL) {
+                displayError(L"Unable to create 5 button");
+            }
+
+            btnFive = five;
+
+            // Create "6" button
+            HWND six = CreateWindowW(
+                L"BUTTON",
+                L"6",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                200,
+                500,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (six == NULL) {
+                displayError(L"Unable to create 6 button");
+            }
+
+            btnSix = six;
+
+            // Create "+" button
+            HWND plus = CreateWindowW(
+                L"BUTTON",
+                L"+",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                300,
+                400,
+                100,
+                200,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (plus == NULL) {
+                displayError(L"Unable to create + button");
+            }
+
+            btnPlus = plus;
+
+            // Create "7" button
+            HWND seven = CreateWindowW(
+                L"BUTTON",
+                L"7",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                0,
+                400,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (seven == NULL) {
+                displayError(L"Unable to create 7 button");
+            }
+
+            btnSeven = seven;
+
+            // Create "8" button
+            HWND eight = CreateWindowW(
+                L"BUTTON",
+                L"8",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                100,
+                400,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (eight == NULL) {
+                displayError(L"Unable to create 8 button");
+            }
+
+            btnEight = eight;
+
+            // Create "9" button
+            HWND nine = CreateWindowW(
+                L"BUTTON",
+                L"9",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                200,
+                400,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (nine == NULL) {
+                displayError(L"Unable to create 9 button");
+            }
+
+            btnNine = nine;
+
             return 0;
         }
 
@@ -231,6 +429,24 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         MessageBox(NULL, L"Clicked Enter!", L"Whoopee!", MB_OK | MB_ICONINFORMATION);
                     } else if (btn == btnOne) {
                         MessageBox(NULL, L"Clicked one!", L"Alright!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnTwo) {
+                        MessageBox(NULL, L"Clicked two!", L"Ayyy!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnThree) {
+                        MessageBox(NULL, L"Clicked three!", L"Yes yes yes!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnFour) {
+                        MessageBox(NULL, L"Clicked four!", L"Hooray!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnFive) {
+                        MessageBox(NULL, L"Clicked five!", L"Woohoo!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnSix) {
+                        MessageBox(NULL, L"Clicked six!", L"Tubular!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnPlus) {
+                        MessageBox(NULL, L"Clicked plus!", L"Wowzers!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnSeven) {
+                        MessageBox(NULL, L"Clicked seven!", L"Whoa!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnEight) {
+                        MessageBox(NULL, L"Clicked eight!", L"Hey hey hey!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnNine) {
+                        MessageBox(NULL, L"Clicked nine!", L"Oh baby!", MB_OK | MB_ICONINFORMATION);
                     }
                     break;
                 }
@@ -265,6 +481,69 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 case VK_NUMPAD1: {
                     // Simulate a click on the "1" button
                     SendMessage(btnOne, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '2':
+                case VK_NUMPAD2: {
+                    // Simulate a click on the "2" button
+                    SendMessage(btnTwo, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '3':
+                case VK_NUMPAD3: {
+                    // Simulate a click on the "3" button
+                    SendMessage(btnThree, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '4':
+                case VK_NUMPAD4: {
+                    // Simulate a click on the "4" button
+                    SendMessage(btnFour, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '5':
+                case VK_NUMPAD5: {
+                    // Simulate a click on the "5" button
+                    SendMessage(btnFive, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '6':
+                case VK_NUMPAD6: {
+                    // Simulate a click on the "6" button
+                    SendMessage(btnSix, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case VK_OEM_PLUS:
+                case VK_ADD: {
+                    // Simulate a click on the "+" button
+                    SendMessage(btnPlus, BM_CLICK, NULL, NULL);
+                    break;
+                }
+                
+                case '7':
+                case VK_NUMPAD7: {
+                    // Simulate a click on the "7" button
+                    SendMessage(btnSeven, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '8':
+                case VK_NUMPAD8: {
+                    // Simulate a click on the "8" button
+                    SendMessage(btnEight, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case '9':
+                case VK_NUMPAD9: {
+                    // Simulate a click on the "9" button
+                    SendMessage(btnNine, BM_CLICK, NULL, NULL);
                     break;
                 }
             }
