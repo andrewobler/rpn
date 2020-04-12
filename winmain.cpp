@@ -54,6 +54,18 @@ HWND btnEight;
 // Handle to the "9" button
 HWND btnNine;
 
+// Handle to the "Neg" button
+HWND btnNeg;
+
+// Handle to the "/" button
+HWND btnDiv;
+
+// Handle to the "*" button
+HWND btnTimes;
+
+// Handle to the "-" button
+HWND btnMinus;
+
 // Global storage of runtime instance handle
 HINSTANCE glblInstance;
 
@@ -120,6 +132,10 @@ int WINAPI wWinMain(
     SetWindowPos(btnSeven, HWND_TOP, 0, mainClientRect.bottom - 400, mainClientRect.right / 4, 100, 0);
     SetWindowPos(btnEight, HWND_TOP, mainClientRect.right / 4, mainClientRect.bottom - 400, mainClientRect.right / 4, 100, 0);
     SetWindowPos(btnNine, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 400, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnNeg, HWND_TOP, 0, mainClientRect.bottom - 500, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnDiv, HWND_TOP, mainClientRect.right / 4, mainClientRect.bottom - 500, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnTimes, HWND_TOP, mainClientRect.right / 2, mainClientRect.bottom - 500, mainClientRect.right / 4, 100, 0);
+    SetWindowPos(btnMinus, HWND_TOP, 3 * mainClientRect.right / 4, mainClientRect.bottom - 500, mainClientRect.right / 4, 100, 0);
 
     ShowWindow(hwnd, nCmdShow);
 
@@ -414,6 +430,90 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
             btnNine = nine;
 
+            // Create "Neg" button
+            HWND neg = CreateWindowW(
+                L"BUTTON",
+                L"Neg",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                0,
+                300,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (neg == NULL) {
+                displayError(L"Unable to create neg button");
+            }
+
+            btnNeg = neg;
+
+            // Create "/" button
+            HWND div = CreateWindowW(
+                L"BUTTON",
+                L"/",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                100,
+                300,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (div == NULL) {
+                displayError(L"Unable to create / button");
+            }
+
+            btnDiv = div;
+
+            // Create "*" button
+            HWND times = CreateWindowW(
+                L"BUTTON",
+                L"*",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                200,
+                300,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (times == NULL) {
+                displayError(L"Unable to create * button");
+            }
+
+            btnTimes = times;
+
+            // Create "-" button
+            HWND minus = CreateWindowW(
+                L"BUTTON",
+                L"-",
+                WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                300,
+                300,
+                100,
+                100,
+                hwnd,
+                NULL,
+                glblInstance,
+                NULL
+            );
+
+            if (minus == NULL) {
+                displayError(L"Unable to create - button");
+            }
+
+            btnMinus = minus;
+
             return 0;
         }
 
@@ -447,6 +547,14 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         MessageBox(NULL, L"Clicked eight!", L"Hey hey hey!", MB_OK | MB_ICONINFORMATION);
                     } else if (btn == btnNine) {
                         MessageBox(NULL, L"Clicked nine!", L"Oh baby!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnNeg) {
+                        MessageBox(NULL, L"Clicked neg!", L"W00t!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnDiv) {
+                        MessageBox(NULL, L"Clicked div!", L"Radical!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnTimes) {
+                        MessageBox(NULL, L"Clicked times!", L"Awesome!", MB_OK | MB_ICONINFORMATION);
+                    } else if (btn == btnMinus) {
+                        MessageBox(NULL, L"Clicked minus!", L"Wow, incredible!", MB_OK | MB_ICONINFORMATION);
                     }
                     break;
                 }
@@ -544,6 +652,31 @@ LRESULT CALLBACK mainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 case VK_NUMPAD9: {
                     // Simulate a click on the "9" button
                     SendMessage(btnNine, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case 'N': {
+                    // Simulate a click on the "Neg" button
+                    SendMessage(btnNeg, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case VK_OEM_2:
+                case VK_DIVIDE: {
+                    // Simulate a click on the "/" button
+                    SendMessage(btnDiv, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                // TODO shift + 8
+                case VK_MULTIPLY: {
+                    SendMessage(btnTimes, BM_CLICK, NULL, NULL);
+                    break;
+                }
+
+                case VK_OEM_MINUS:
+                case VK_SUBTRACT: {
+                    SendMessage(btnMinus, BM_CLICK, NULL, NULL);
                     break;
                 }
             }
